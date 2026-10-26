@@ -66,36 +66,7 @@ for mov in roulette:
 
 
 #Picking random movies from each umbrella
-'''used = []
-for i in range(5):
-    roulette_round = []
-    for j in range(3):
-        if j == 0:
-            umb = heavy
-        elif j == 1:
-            umb = light
-        elif j == 2:
-            umb = escape
-
-        available = []
-        for k in umb:
-            if k not in used:
-                available.append(k)
-
-        choice = 
-
-        choice = random.choice(umb)
-        while choice in used:
-            choice = random.choice(umb)
-        roulette_round.append(choice)
-        used.append(choice)
-
-    print("\nRoulette Round", i+1)
-    random.shuffle(roulette_round)
-    for film in roulette_round:
-        print(film["name"])'''
-
-
+umb_pts_dict = {"Heavy": 0, "Light": 0, "Escape": 0}
 available_heavy = list(heavy)
 available_light = list(light)
 available_escape = list(escape)
@@ -118,5 +89,59 @@ for i in range(5):
 
     print("\nRoulette Round", i+1)
     random.shuffle(roulette_round)
-    for film in roulette_round:
-        print(film["name"])
+    for n, film in enumerate(roulette_round):
+        print(n+1, film["name"])
+
+    #Getting choice per roulette_round
+    ch = int(input("\nPick a movie (1/2/3):"))
+    film_genre = roulette_round[ch-1]["genre"]              #takes movie and gets its genre
+    umb_name = genre_to_umbrella(film_genre, umbrella)      #identifies the umbrella of the genre
+    umb_pts_dict[umb_name] = umb_pts_dict[umb_name] + 1     #increments points for that umbrella 
+
+max_val = max(umb_pts_dict.values())
+max_umb = []
+for k, v in umb_pts_dict.items():
+    if v == max_val:
+        max_umb.append(k)
+
+print(max_umb)
+
+
+#To pick tags of each movie
+if len(max_umb) == 1:
+    tag_rounds = 4
+if len(max_umb) == 2:
+    tag_rounds = 2
+
+selected_tags = []
+for i in max_umb:
+    if i == "Heavy":
+        umb = available_heavy
+    elif i == "Light":
+        umb = available_light
+    elif i == "Escape":
+        umb = available_escape
+
+    for x in range(tag_rounds):
+        random.shuffle(umb)
+
+        if umb:
+            check_tag = umb.pop()
+
+        print(check_tag["name"])
+        for n, j in enumerate(check_tag["tags"]):
+            print(n+1, j)
+
+        print("\nChoose all tags you like. Enter 0 if none")
+        l = input("\nEnter Tags: ").strip().split(" ")
+        for j in l:
+            if j == "0":
+                break
+            else:
+                j = int(j)
+            if check_tag["tags"][j-1] not in selected_tags:
+                selected_tags.append(check_tag["tags"][j-1])
+            else:
+                continue
+
+print(selected_tags)

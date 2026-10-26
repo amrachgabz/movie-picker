@@ -75,9 +75,14 @@ random.shuffle(roulette_round_1)
 for picks in roulette_round_1:
     print(picks["name"])'''
 
-L1 = [1, 2, 3, 4, 5]
-L2 = list(L1)
-L2[3] = 7
-print(L1)
-print(L2)
+'''dict = {"Heavy": 1, "Light": 2, "Escape": 2}
+max_val = max(dict.values())
+max_umb = []
+for k, v in dict.items():
+    if v == max_val:
+        max_umb.append(k)
+print(max_umb)'''
 
+#l = input("Enter list: ").split(" ")
+l = [int(x) for x in input("Enter list: ").split(" ")]
+print(l)
