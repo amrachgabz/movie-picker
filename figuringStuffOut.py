@@ -37,9 +37,13 @@ print(stars_to_numbers(" "))'''
 #print(split_genre_tags("Drama, , Thriller"))    
 print(split_genre_tags(""))'''
 
-def empty_order(order):
+'''def empty_order(order):
     if (order == "None"):
         return 0
 
-print(empty_order("None"))
+print(empty_order("None"))'''
+
+dict = {"Action": 3, "Adventure": 7}
+dict.append("Fantasy")
+print(dict["Fantasy"])
 

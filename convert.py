@@ -55,6 +55,7 @@ for row in reader:
 
 f.close()
 
+#Writing everything into a json file
 f = open("movies.json", "w", encoding = "utf-8")
 json.dump(movie_list, f, indent = 2, ensure_ascii = False)
 f.close()
